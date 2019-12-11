@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+   android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SubmitFlightActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/gradient_background_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/goBackImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/goBackImageView"
+            android:text="Add a new flight"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_edit_field"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginEnd="24dp"
+            android:foregroundGravity="center_horizontal"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/seatNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/simple_rectangle_white"
+                android:hint="Your seat number"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/flightNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/simple_rectangle_white"
+
+                android:hint="Flight number"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+
+            <AutoCompleteTextView
+                android:id="@+id/departureEditTetxiView"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:autofillHints="Departure airport"
+                android:background="@drawable/simple_rectangle_white"
+                android:hint="Departure airport"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/destinationEditTetxiView"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:autofillHints="Arrival airport"
+                android:background="@drawable/simple_rectangle_white"
+                android:hint="Arrival airport"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/airlinesEditTetxiView"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:autofillHints="Airlines"
+                android:background="@drawable/simple_rectangle_white"
+                android:hint="Airlines"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/dateEditTetxiView"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/simple_rectangle_white"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="Departure date "
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <EditText
+                android:id="@+id/timeEditTetxView"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/simple_rectangle_white"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="Departure time"
+                android:imeOptions="actionNext"
+                android:inputType="time"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/submitFlightButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_fuchsia"
+                android:text="Submit"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

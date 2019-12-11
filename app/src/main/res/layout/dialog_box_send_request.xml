@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_box_smooth_corners"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="137dp"
+            app:srcCompat="@drawable/logo_dialog_box" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rosario"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/dialog_send_title"
+            android:textAlignment="center"
+            android:textColor="#C9000000"
+            android:textSize="24sp" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/messageFirstPartTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rosario"
+            android:padding="2dp"
+            android:text="@string/dialog_send_request_first_part"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/recipientNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/messageFirstPartTextView"
+            android:fontFamily="@font/rosario"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="xxx"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/messageSecPartTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipientNameTextView"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rosario"
+            android:padding="2dp"
+            android:text="@string/dialog_send_request_second_part"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/senderSeatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipientNameTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/messageSecPartTextView"
+            android:textColor="@color/highlighted_fuchsia_text"
+            android:fontFamily="@font/rosario"
+            android:padding="2dp"
+            android:text="xxx "
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/messageThirdPartTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/senderSeatTextView"
+            android:layout_centerHorizontal="false"
+            android:layout_marginLeft="6dp"
+            android:layout_toLeftOf="@id/recipientNameSecTextView"
+            android:fontFamily="@font/rosario"
+            android:padding="2dp"
+            android:text="@string/dialog_send_request_third_part"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/recipientNameSecTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/senderSeatTextView"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/rosario"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="xxx"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/responderSeatNumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/senderSeatTextView"
+            android:layout_toRightOf="@id/recipientNameSecTextView"
+            android:fontFamily="@font/rosario"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/highlighted_fuchsia_text"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="xxx"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_cancel"
+            android:text="cancel"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/yesButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_fuchsia"
+            android:text="yes"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+</LinearLayout>

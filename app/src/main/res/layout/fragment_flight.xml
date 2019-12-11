@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.FlightFragment">
+
+    <RelativeLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/gradient_background_primary" >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:text="Upcoming flights"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/noFlightsDescrTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/addFlight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/no_flights"
+        android:textAlignment="center"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/noFlightsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/noFlightsDescrTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="No flights"
+        android:textColor="#000080"
+        android:textSize="20dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/addFlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif"
+        android:text="Add a flight"
+        android:textColor="#E3007C"
+        android:textSize="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/flightRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/addFlight"
+        android:layout_below="@+id/toolbarLayout"
+        android:layout_centerVertical="true" />
+
+
+</RelativeLayout>
+

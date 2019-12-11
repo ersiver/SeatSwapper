@@ -1,0 +1,414 @@
+<resources>
+    <string name="app_name">Seat Swapper</string>
+    <string name="no_flights"> You have no upcoming flights. Maybe it is time to add a new flight?</string>
+
+    <string name="shared_flight">Passengers sharing your flight </string>
+
+    <string name="empty_mail">You have no requests</string>
+
+    <string name="dialog_send_title">Ready to Seat Swap?</string>
+
+    <string name="dialog_send_request_first_part">"Would you like to send request to "</string>
+
+    <string name="dialog_send_request_second_part">"to swap your seat "</string>
+
+    <string name="dialog_send_request_third_part">" with "</string>
+
+    <string name="statusTitleTextView">"Status"</string>
+
+    <string name="statusLineOneTextView">" sent a request to "</string>
+
+    <string name="statusLineTwoSenderTextView">" didn't reply."</string>
+
+    <string name="statusLineTwoRecipientTextView">"and you need to reply"</string>
+
+    <string name="requestTitleTextView">"Request details"</string>
+
+    <string name="requestLineOneTextView">" requested to swap "</string>
+
+    <string name="requestLineThreeTextView">"Requested: "</string>
+
+    <string name="requestLineFourTextView">"Responded: "</string>
+
+    <string name="flightTitlelTextView">"Flight details"</string>
+
+    <string name="statusLineSixTextView">" this request"</string>
+
+    <string name="statusSenderNewSeat">" new seat is "</string>
+
+    <string name="rejected_answer">" rejected this request"</string>
+
+
+
+
+
+
+
+
+    <string-array name="list_of_airlines">
+        <item>British Airways</item>
+        <item>LOT</item>
+        <item>Primera Air</item>
+        <item>KLM</item>
+        <item>TUI</item>
+        <item>Belavia </item>
+        <item>Lufthansa</item>
+        <item>Loganair</item>
+        <item>Air Moldova </item>
+        <item>Air France</item>
+        <item>Wizz Air</item>
+        <item>KLM Cityhopper </item>
+        <item>Flybe</item>
+        <item>City Jet </item>
+        <item>Aeroflot</item>
+        <item>Air Europa</item>
+        <item>Air Corsica </item>
+        <item>Vueling</item>
+        <item>Ukraine Int.</item>
+        <item>VLM</item>
+        <item>Aer Lingus</item>
+        <item>airBaltic</item>
+        <item>Montenegro</item>
+        <item>Iberia</item>
+        <item>Blue Air</item>
+        <item>Bulgaria Air </item>
+        <item>SWISS</item>
+        <item>Air Malta</item>
+        <item>Atlantic Airways</item>
+        <item>easyJet</item>
+        <item>Luxair</item>
+        <item>SkyWork </item>
+        <item>SAS</item>
+        <item>Aurigny</item>
+        <item>Germania </item>
+        <item>Ryanair</item>
+        <item>bmi</item>
+        <item>Hainan</item>
+        <item>eurowings</item>
+        <item>CzechAirlines</item>
+        <item>edelweiss air</item>
+        <item>BrusselsAirlines</item>
+        <item>AirItaly</item>
+        <item>Transavia France </item>
+        <item>Alitalia</item>
+        <item>Smart Wings</item>
+        <item>Adria</item>
+        <item>Austrian Airlines</item>
+        <item>Air Serbia</item>
+        <item>Albawings </item>
+        <item>Finnair</item>
+        <item>Croatia Airlines</item>
+        <item>Fly One</item>
+        <item>Norwegian</item>
+        <item>Scilly Skybus</item>
+        <item>Directflight </item>
+        <item>TAP Air Portugal</item>
+        <item>Wideroe</item>
+        <item>BHAir </item>
+        <item>SATA</item>
+        <item>Hebridean</item>
+        <item>Aegean</item>
+        <item>Cobalt</item>
+        <item>Lydd Air </item>
+        <item>Jet2</item>
+        <item>TAROM</item>
+        <item>Air Astana</item>
+        <item>Tunisair</item>
+        <item>S7 Airlines</item>
+        <item>Gulf Air</item>
+        <item>Israir </item>
+        <item>Emirates</item>
+        <item>Icelandair</item>
+        <item>Air Dolomiti </item>
+        <item>Qatar Airways</item>
+        <item>Atlasglobal</item>
+        <item>Rossiya</item>
+        <item>Pegasus</item>
+        <item>Azerbaijan</item>
+        <item>Uzbekistan Airways</item>
+        <item>EL AL Israel</item>
+        <item>Asiana</item>
+        <item>Georgian Airways </item>
+        <item>MEA</item>
+        <item>Royal Air Maroc</item>
+        <item>Blu-express </item>
+        <item>HOP!</item>
+        <item>Japan Airlines</item>
+        <item>Turkmenistan Airlines </item>
+        <item>EgyptAir</item>
+        <item>Korean Air</item>
+        <item>arkia </item>
+        <item>Cathay Pacific</item>
+        <item>WOW air</item>
+        <item>SunExpress </item>
+        <item>Etihad Airways</item>
+        <item>Royal Jordanian</item>
+        <item>Air Arabia</item>
+
+    </string-array>
+
+    <string-array name="list_of_airports">
+        <item>Tirana</item>
+        <item>Yerevan</item>
+        <item>Graz</item>
+        <item>Innsbruck</item>
+        <item>Klagenfurt</item>
+        <item>Linz</item>
+        <item>Salzburg</item>
+        <item>Vienna</item>
+        <item>Baku</item>
+        <item>Minsk</item>
+        <item>Antwerp</item>
+        <item>Brussels</item>
+        <item>Charleroi</item>
+        <item>Liege</item>
+        <item>Ostend</item>
+        <item>Sarajevo</item>
+        <item>Tuzla</item>
+        <item>Burgas</item>
+        <item>Sofia</item>
+        <item>Varna</item>
+        <item>Dubrovnik</item>
+        <item>Pula</item>
+        <item>Split</item>
+        <item>Zadar</item>
+        <item>Zagreb</item>
+        <item>Larnaca</item>
+        <item>Paphos</item>
+        <item>Brno</item>
+        <item>Prague</item>
+        <item>Aalborg</item>
+        <item>Aarhus</item>
+        <item>Billund</item>
+        <item>Copenhagen</item>
+        <item>Vágar</item>
+        <item>Tallinn</item>
+        <item>Helsinki</item>
+        <item>Oulu</item>
+        <item>Rovaniemi</item>
+        <item>Tampere</item>
+        <item>Turku</item>
+        <item>Vaasa</item>
+        <item>Ajaccio</item>
+        <item>Bastia</item>
+        <item>Bergerac</item>
+        <item>Biarritz</item>
+        <item>Bordeaux</item>
+        <item>Brest Bretagne</item>
+        <item>Figari</item>
+        <item>Lille</item>
+        <item>Lyon-SaintExupéry</item>
+        <item>Marseille</item>
+        <item>Montpellier</item>
+        <item>Nantes</item>
+        <item>Nice</item>
+        <item>Paris Beauvais</item>
+        <item>Paris CDG</item>
+        <item>Paris Orly</item>
+        <item>Strasbourg</item>
+        <item>Rennes </item>
+        <item>Réunion</item>
+        <item>Toulon-Hyères</item>
+        <item>Toulouse Blagnac</item>
+        <item>Tbilisi</item>
+        <item>Allgäu Memmingen</item>
+        <item>Berlin Brandenburg</item>
+        <item>Berlin Schönefeld</item>
+        <item>Berlin Tegel</item>
+        <item>Bremen</item>
+        <item>Cologne Bonn</item>
+        <item>Dortmund</item>
+        <item>Dresden</item>
+        <item>Düsseldorf</item>
+        <item>Frankfurt</item>
+        <item>Frankfurt-Hahn</item>
+        <item>Friedrichshafen</item>
+        <item>Hamburg</item>
+        <item>Hanover</item>
+        <item>KarlsruheBaden-Baden</item>
+        <item>LeipzigHalle</item>
+        <item>Munich</item>
+        <item>Münster Osnabrück</item>
+        <item>Nuremberg</item>
+        <item>Paderborn Lippstadt</item>
+        <item>Stuttgart</item>
+        <item>Weeze</item>
+        <item>Athens</item>
+        <item>Chania</item>
+        <item>Corfu</item>
+        <item>Heraklion</item>
+        <item>Kos</item>
+        <item>Mykonos</item>
+        <item>Rhodes</item>
+        <item>Santorini</item>
+        <item>Thessaloniki</item>
+        <item>Zante</item>
+        <item>Budapest</item>
+        <item>Debrecen</item>
+        <item>Keflavik</item>
+        <item>Cork</item>
+        <item>Dublin</item>
+        <item>Ireland West Knock</item>
+        <item>Kerry</item>
+        <item>Shannon</item>
+        <item>Alghero</item>
+        <item>Ancona</item>
+        <item>Bari</item>
+        <item>Bergamo</item>
+        <item>Bologna</item>
+        <item>Brindisi</item>
+        <item>Cagliari</item>
+        <item>Catania Fontanarossa</item>
+        <item>Comiso</item>
+        <item>Florence</item>
+        <item>Genoa</item>
+        <item>Lamezia Terme</item>
+        <item>MilanLinate</item>
+        <item>MilanMalpensa</item>
+        <item>Naples</item>
+        <item>Olbia Costa Smeralda</item>
+        <item>Palermo</item>
+        <item>Perugia</item>
+        <item>Pescara</item>
+        <item>Pisa</item>
+        <item>Rome Ciampino</item>
+        <item>Rome Fiumicino</item>
+        <item>Trapani</item>
+        <item>Treviso</item>
+        <item>Turin</item>
+        <item>Venice</item>
+        <item>Verona</item>
+        <item>Almaty</item>
+        <item>Astana</item>
+        <item>Pristina</item>
+        <item>Riga</item>
+        <item>Kaunas</item>
+        <item>Vilnius</item>
+        <item>Luxembourg</item>
+        <item>Skopje</item>
+        <item>Malta</item>
+        <item>Chisinau</item>
+        <item>Podgorica</item>
+        <item>Tivat</item>
+        <item>Amsterdam Schiphol</item>
+        <item>Eindhoven</item>
+        <item>Groningen Eelde</item>
+        <item>Maastricht Aachen</item>
+        <item>Rotterdam The Hague</item>
+        <item>Ålesund</item>
+        <item>Bergen</item>
+        <item>Bodø</item>
+        <item>Haugesund</item>
+        <item>Kristiansand</item>
+        <item>Oslo</item>
+        <item>Sandefjord Torp</item>
+        <item>Stavanger</item>
+        <item>Tromsø</item>
+        <item>Trondheim</item>
+        <item>Gdansk</item>
+        <item>Katowice</item>
+        <item>Kraków</item>
+        <item>Poznan</item>
+        <item>Warsaw</item>
+        <item>WarsawModlin</item>
+        <item>Wroclaw</item>
+        <item>Faro</item>
+        <item>Lisbon</item>
+        <item>Madeira</item>
+        <item>Ponta Delgada</item>
+        <item>Porto</item>
+        <item>BucharestHenri Coanda</item>
+        <item>Cluj-Napoca</item>
+        <item>Iasi</item>
+        <item>Timisoara</item>
+        <item>Koltsovo</item>
+        <item>Moscow Domodedovo</item>
+        <item>Moscow Sheremetyevo</item>
+        <item>Moscow Vnukovo</item>
+        <item>Novosibirsk Tolmachevo</item>
+        <item>Saint Petersburg Pulkovo</item>
+        <item>Sochi</item>
+        <item>Belgrade Nikola Tesla</item>
+        <item>Niš</item>
+        <item>Bratislava</item>
+        <item>Košice</item>
+        <item>Ljubljana</item>
+        <item>Alicante</item>
+        <item>Almeria</item>
+        <item>Asturias</item>
+        <item>Barcelona</item>
+        <item>Bilbao</item>
+        <item>Fuerteventura</item>
+        <item>Girona</item>
+        <item>Gran Canaria</item>
+        <item>Ibiza</item>
+        <item>Jerez</item>
+        <item>LaP alma</item>
+        <item>Lanzarote</item>
+        <item>Madrid Barajas</item>
+        <item>Malaga</item>
+        <item>Menorca</item>
+        <item>Palma de Mallorca</item>
+        <item>Regiónde Murcia</item>
+        <item>Reus</item>
+        <item>Santander</item>
+        <item>Santiagode Compostela</item>
+        <item>Seville</item>
+        <item>TenerifeNorth</item>
+        <item>TenerifeSouth</item>
+        <item>Valencia</item>
+        <item>Zaragoza</item>
+        <item>Gothenburg Landvetter</item>
+        <item>Malmö</item>
+        <item>Stockholm Arlanda</item>
+        <item>Stockholm Bromma</item>
+        <item>Stockholm Skavsta</item>
+        <item>Stockholm Västerås</item>
+        <item>Basel Mulhouse Freiburg</item>
+        <item>Bern</item>
+        <item>Geneva</item>
+        <item>Lugano</item>
+        <item>Zurich</item>
+        <item>Adana</item>
+        <item>Ankara Esenboga</item>
+        <item>Antalya</item>
+        <item>Dalaman</item>
+        <item>Istanbul New</item>
+        <item>Istanbul Sabiha Gökcen</item>
+        <item>Izmir Adnan Menderes</item>
+        <item>Milas-Bodrum</item>
+        <item>Trabzon</item>
+        <item>Kiev Boryspil</item>
+        <item>Kiev Zhuliany</item>
+        <item>Lviv</item>
+        <item>Odessa</item>
+        <item>Aberdeen</item>
+        <item>Belfast City</item>
+        <item>Belfast International</item>
+        <item>Birmingham</item>
+        <item>Bristol</item>
+        <item>Cardiff</item>
+        <item>Doncaster Sheffield</item>
+        <item>EastMidlands</item>
+        <item>Edinburgh</item>
+        <item>Exeter</item>
+        <item>Glasgow</item>
+        <item>Glasgow Prestwick</item>
+        <item>Humberside</item>
+        <item>Jersey</item>
+        <item>Leeds Bradford</item>
+        <item>Liverpool</item>
+        <item>London City</item>
+        <item>London Gatwick</item>
+        <item>London Heathrow</item>
+        <item>London Luton</item>
+        <item>London Southend</item>
+        <item>London Stansted</item>
+        <item>Manchester</item>
+        <item>Newcastle</item>
+        <item>Southampton</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

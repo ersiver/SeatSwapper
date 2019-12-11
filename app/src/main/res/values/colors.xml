@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#38A2F9</color>
+    <color name="colorPrimaryDark">#000080</color>
+    <color name="colorAccent">#B0B0B0</color>
+    <color name="pressed_color">@android:color/darker_gray</color>
+    <color name="default_color">#38A2F9</color>
+    <color name="highlighted_text">#25D1FE</color>
+    <color name="tabNotSelectedTextColor">#B0B0B0</color>
+    <color name="highlighted_fuchsia_text">#E3007C</color>
+    <color name="dialog_color">#8e8efa</color>
+
+
+</resources>

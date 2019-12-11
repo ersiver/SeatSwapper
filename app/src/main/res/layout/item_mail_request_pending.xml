@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:orientation="horizontal">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/statusCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/statusLt"
+                android:layout_width="85dp"
+                android:layout_height="140dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/status" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/statusRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/statusLt"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/statusTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/statusTitleTextView"
+                    android:textSize="22dp" />
+
+
+                <TextView
+                    android:id="@+id/progressTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusTitleTextView"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/background_status_pending"
+                    android:foregroundGravity="center_vertical"
+                    android:paddingStart="4dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="2dp"
+                    android:paddingBottom="4dp"
+                    android:text="  pending..."
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/requesterNameLineOneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progressTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/statusLineOneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progressTextView"
+                    android:layout_toEndOf="@+id/requesterNameLineOneTextView"
+                    android:text="@string/statusLineOneTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/responderNameLineOneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progressTextView"
+                    android:layout_toEndOf="@+id/statusLineOneTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/statusLineTwoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/responderNameLineOneTextView"
+                    android:text="but "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/responderNameLineTwoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/responderNameLineOneTextView"
+                    android:layout_toEndOf="@+id/statusLineTwoTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/statusLinefiveTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/responderNameLineTwoTextView"
+                    android:layout_below="@id/responderNameLineOneTextView"
+                    android:text="@string/statusLineTwoSenderTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/responderNameLineThreeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusLineTwoTextView"
+                    android:text="Jan"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/statusResponseTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusLineTwoTextView"
+                    android:layout_toEndOf="@+id/responderNameLineThreeTextView"
+                    android:text=" accepted "
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/statusLineSixResponseTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusLineTwoTextView"
+                    android:layout_toEndOf="@+id/statusResponseTextView"
+                    android:text="@string/statusLineSixTextView"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:id="@+id/requesterNameLineTwoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusResponseTextView"
+                    android:text="Your"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/statusLineThreeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusResponseTextView"
+                    android:layout_toEndOf="@id/requesterNameLineTwoTextView"
+                    android:text="@string/statusSenderNewSeat"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/requesterNewSeatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusResponseTextView"
+                    android:layout_toEndOf="@id/statusLineThreeTextView"
+                    android:text="15b"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/andTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/statusResponseTextView"
+                    android:layout_toEndOf="@id/requesterNewSeatTextView"
+                    android:text=" and "
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:id="@+id/responderNameLineFourTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requesterNewSeatTextView"
+                    android:text="Jan's"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/statusLineFourTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requesterNewSeatTextView"
+                    android:layout_toEndOf="@id/responderNameLineFourTextView"
+                    android:text="@string/statusSenderNewSeat"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/responderNewSeatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requesterNewSeatTextView"
+                    android:layout_toEndOf="@id/statusLineFourTextView"
+                    android:text="12a"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/requestCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/statusCardView"
+        android:layout_marginBottom="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/requestLt"
+                android:layout_width="85dp"
+                android:layout_height="145dp">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/request" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/requestRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/requestLt"
+                android:padding="8dp">
+
+
+                <TextView
+                    android:id="@+id/requestTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Request details"
+                    android:textAlignment="center"
+                    android:textSize="22dp" />
+
+
+                <TextView
+                    android:id="@+id/requesterNameLineThreeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/requestTitleTextView"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/requestLineOneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/requestTitleTextView"
+                    android:layout_toEndOf="@+id/requesterNameLineThreeTextView"
+                    android:text="@string/requestLineOneTextView"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/requesterSeatNumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requestLineOneTextView"
+                    android:textColor="@color/highlighted_fuchsia_text"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/withTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requestLineOneTextView"
+                    android:layout_toEndOf="@id/requesterSeatNumTextView"
+                    android:text=" with "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/responderNameLineFiveTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requestLineOneTextView"
+                    android:layout_toEndOf="@+id/withTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/responderSeatNumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requestLineOneTextView"
+                    android:layout_toEndOf="@id/responderNameLineFiveTextView"
+                    android:textColor="@color/highlighted_fuchsia_text"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/requestLineThreeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requesterSeatNumTextView"
+                    android:text="@string/requestLineThreeTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/dateRequestTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requesterSeatNumTextView"
+                    android:layout_toEndOf="@id/requestLineThreeTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/requestLineFourTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requestLineThreeTextView"
+                    android:text="@string/requestLineFourTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/dateResponseTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/requestLineThreeTextView"
+                    android:layout_toEndOf="@id/requestLineFourTextView"
+                    android:text="pending"
+                    android:textSize="18sp" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/requestCardView"
+        android:layout_marginBottom="8dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/flightLt"
+                android:layout_width="85dp"
+                android:layout_height="125dp">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/flight" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/flightRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/flightLt"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/flightTitlelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/flightTitlelTextView"
+                    android:textSize="22dp" />
+
+
+                <TextView
+                    android:id="@+id/departureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/flightTitlelTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/dashTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/flightTitlelTextView"
+                    android:layout_toEndOf="@+id/departureTextView"
+                    android:text=" - "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/destinationTextView"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/flightTitlelTextView"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/dashTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/flightDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/destinationTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/flightTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/destinationTextView"
+                    android:layout_toEndOf="@+id/flightDateTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/flightNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/flightDateTextView"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/airlinesTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/flightDateTextView"
+                    android:layout_toEndOf="@id/flightNumberTextView"
+                    android:textSize="18sp" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/responseRelativeLayout"
+        android:layout_width="234dp"
+        android:layout_height="67dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/white_box_smooth_corners"
+        android:padding="10dp"
+        android:visibility="gone">
+
+
+        <Button
+            android:id="@+id/acceptButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_fuchsia"
+            android:text="accept request"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/rejectButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="6dp"
+            android:layout_toLeftOf="@+id/acceptButton"
+            android:background="@drawable/button_cancel"
+            android:text="reject request"
+            android:textColor="@android:color/white" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+
+
