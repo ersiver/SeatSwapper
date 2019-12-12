@@ -124,7 +124,7 @@ public class RequestSubmitter {
 
     }
 
-    //2. Sent a push massage, double for each user to easier retrieve user messages
+    //2. Sent a push massage, double for each user to allow further deleting of the user's messages
     private void updateMessagesDatabase() {
         String messageSenderRef = "Messages/" + requesterId;
         String messageReceiverRef = "Messages/" + responderId;

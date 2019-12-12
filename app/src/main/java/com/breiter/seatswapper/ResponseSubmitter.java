@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ResponseSubmitter {
-
     private DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
     //1. Accepting the request from MessageAdapter
@@ -79,7 +78,6 @@ public class ResponseSubmitter {
 
     //4. When the request is approved swap seats of the 2 passengers
     private void replacePassengersSeats(String flightId, String requesterId, String responderId, String newRequesterSeat, String newResponderSeat) {
-
         HashMap<String, Object> requesterMap = new HashMap<>();
         requesterMap.put("passengerSeat", newRequesterSeat);
         requesterMap.put("search", newRequesterSeat.toLowerCase());
