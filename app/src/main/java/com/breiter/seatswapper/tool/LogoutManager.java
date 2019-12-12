@@ -15,22 +15,15 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LogoutManager {
 
     private Context context;
-
     private Dialog dialog;
-
     private TextView titleTextView;
-
     private TextView messageTextView;
-
     private Button cancelButton;
-
     private Button yesButton;
-
 
     public LogoutManager(Context context) {
         this.context = context;
     }
-
 
 
     public void logout() {
@@ -49,7 +42,6 @@ public class LogoutManager {
         messageTextView = dialog.findViewById(R.id.warningTextView);
         messageTextView.setText(message);
 
-
         cancelButton = dialog.findViewById(R.id.noButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +56,9 @@ public class LogoutManager {
             public void onClick(View v) {
 
                 FirebaseAuth.getInstance().signOut();
-
-
                 Intent intent = new Intent(context, LoginActivity.class).
                         setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
                 context.startActivity(intent);
-
 
             }
         });

@@ -1,5 +1,7 @@
 package com.breiter.seatswapper.model;
 
+import androidx.annotation.NonNull;
+
 public class FlightPassenger implements Comparable<FlightPassenger> {
 
     private String passengerId;
@@ -49,7 +51,7 @@ public class FlightPassenger implements Comparable<FlightPassenger> {
     }
 
     public void setIswaiting(boolean isawaiting) {
-        isawaiting = isawaiting;
+        this.isawaiting = isawaiting;
     }
 
     public String getFlightId() {
@@ -63,17 +65,15 @@ public class FlightPassenger implements Comparable<FlightPassenger> {
 
 
 
-    //To display passenger list in an order they seat
+    //Compare by seat
     @Override
-    public int compareTo(FlightPassenger other) {
+    public int compareTo(@NonNull FlightPassenger other) {
 
         String seatNumberThis = this.getSearch();
-
         String seatNumberOther = other.getSearch();
 
         //If the seat starts with the same numbers, then sort alphabetically in ascending order (12A, 12B etc.)
         if (getDigits(seatNumberThis) == getDigits(seatNumberOther))
-
             return getNonDigits(seatNumberThis).compareTo(getNonDigits(seatNumberOther));
 
         //If the seat numbers start with various numbers then sort them in ascending order (1F, 2B, 12C etc)
@@ -85,16 +85,13 @@ public class FlightPassenger implements Comparable<FlightPassenger> {
 
     //Remove all digits from the string
     private String getNonDigits(String s) {
-
         return s.replaceAll("\\d", "");
 
     }
 
     //Remove all digits from the string
     private int getDigits(String s) {
-
         String digits = s.replaceAll("\\D+", "");
-
         return Integer.parseInt(digits);
 
     }

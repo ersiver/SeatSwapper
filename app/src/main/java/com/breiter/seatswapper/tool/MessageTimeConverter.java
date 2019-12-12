@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MessageTimeConverter {
 
     public static String getTime(Long time) {
 
         Timestamp timestamp = new Timestamp(time);
-
         Date date = new Date(timestamp.getTime());
 
         String pattern;
@@ -29,19 +29,14 @@ public class MessageTimeConverter {
         else
             pattern = "HH:mm";
 
-
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
         return sdf.format(date);
 
-
     }
-
 
     public static String getRequestTime(Message message) {
 
         Long time = message.getTimeRequest();
-
         return getTime(time);
 
     }
@@ -50,7 +45,6 @@ public class MessageTimeConverter {
     public static String getResponseTime(Message message) {
 
         Long time = message.getTimeResponse();
-
         if (time == 0)
             return "awaiting";
         else
@@ -62,9 +56,7 @@ public class MessageTimeConverter {
     private static Date periodInDays(int daysAmount) {
 
         Calendar cal = Calendar.getInstance();
-
-        cal.add(Calendar.DATE, -daysAmount);
-
+        cal.add(Calendar.DATE, - daysAmount);
         return cal.getTime();
     }
 

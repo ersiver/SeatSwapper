@@ -19,7 +19,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     }
 
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -32,7 +31,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         else
             return new ProfileFragment();
-
 
     }
 
@@ -53,7 +51,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         else
             return "Profile";
-
 
     }
 

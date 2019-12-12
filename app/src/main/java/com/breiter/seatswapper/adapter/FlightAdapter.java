@@ -43,41 +43,29 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_flight, parent, false);
-
         rootRef = FirebaseDatabase.getInstance().getReference();
-
         currentuser = FirebaseAuth.getInstance().getCurrentUser();
-
         return new FlightAdapter.ViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         final UserFlight userFlight = flightList.get(position);
-
         displayUserSeat(holder, userFlight.getFlightId());      //1
-
         displayFlightDetails(holder, userFlight.getFlightId()); //2
-
 
         //Redirect to individual flight
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(context, PassengerActivity.class);
-
                 intent.putExtra("flightId", userFlight.getFlightId());
-
                 context.startActivity(intent);
-
             }
         });
 
     }
-
 
 
     //1. Get current user seat no. from Firebase and display on a text view
@@ -90,11 +78,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         FlightPassenger flightPassenger = dataSnapshot.getValue(FlightPassenger.class);
-
+                        if (flightPassenger != null)
                         holder.seatTextView.setText(flightPassenger.getPassengerSeat());
-
                     }
 
                     @Override
@@ -104,8 +90,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                 });
 
     }
-
-
 
     //2. Get the flight info from Firebase and display on a text view
     private void displayFlightDetails(final ViewHolder holder, String flightId) {
@@ -116,16 +100,12 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         Flight flight = dataSnapshot.getValue(Flight.class);
-
-                        holder.departureTextView.setText(flight.getDeparture());
-
-                        holder.destinationTextView.setText(flight.getDestination());
-
-                        holder.dateTextView.setText(flight.getDate() + ",");
-
-                        holder.timeTextView.setText(flight.getTime() + ",");
-
-
+                        if (flight != null) {
+                            holder.departureTextView.setText(flight.getDeparture());
+                            holder.destinationTextView.setText(flight.getDestination());
+                            holder.dateTextView.setText(flight.getDate() + ",");
+                            holder.timeTextView.setText(flight.getTime() + ",");
+                        }
                     }
 
                     @Override
@@ -134,18 +114,14 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                     }
                 });
 
-
     }
-
-
 
     @Override
     public int getItemCount() {
         return flightList.size();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView departureTextView;
         TextView destinationTextView;
@@ -153,17 +129,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         TextView timeTextView;
         TextView seatTextView;
 
-        public ViewHolder(@NonNull View itemView) {
+         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             departureTextView = itemView.findViewById(R.id.departureTextView);
-
             destinationTextView = itemView.findViewById(R.id.destinationTextView);
-
             dateTextView = itemView.findViewById(R.id.dateTextView);
-
             timeTextView = itemView.findViewById(R.id.timeTextView);
-
             seatTextView = itemView.findViewById(R.id.usernameTextView);
 
         }

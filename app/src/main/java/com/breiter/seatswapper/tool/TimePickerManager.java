@@ -9,6 +9,7 @@ import android.widget.TimePicker;
 import com.breiter.seatswapper.R;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class TimePickerManager {
 
@@ -17,9 +18,8 @@ public class TimePickerManager {
     private TimePickerDialog timePickerDialog;
     private Context context;
     private String pickedTime;
-
-
-    int hour, minute;
+    private int hour;
+    private int minute;
 
     public TimePickerManager(Context context, EditText dateEditText) {
         this.context = context;
@@ -33,22 +33,14 @@ public class TimePickerManager {
             public void onClick(View view) {
 
                 calendar = Calendar.getInstance();
-
                 hour = calendar.get(Calendar.HOUR_OF_DAY);
                 minute = calendar.get(Calendar.MINUTE);
-
-
-
                 timePickerDialog = new TimePickerDialog(context, R.style.DialogStyle, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-
                         hour = selectedHour;
                         minute = selectedMinute;
-
-
-                        pickedTime = String.format("%02d:%02d", selectedHour, selectedMinute);
-
+                        pickedTime = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
                         updateLabel();
                     }
                 }, hour, minute, true);
@@ -57,7 +49,6 @@ public class TimePickerManager {
             }
         });
     }
-
 
     private void updateLabel() {
         timeEditText.setText(pickedTime);

@@ -1,5 +1,7 @@
 package com.breiter.seatswapper.model;
 
+import androidx.annotation.NonNull;
+
 public class Message implements Comparable<Message> {
 
 
@@ -128,19 +130,16 @@ public class Message implements Comparable<Message> {
 
     //Display messages in descending time order
     @Override
-    public int compareTo(Message other) {
+    public int compareTo(@NonNull Message other) {
 
         if (this.timeResponse == 0 && other.timeResponse == 0) {
             return (int) (other.timeRequest - this.timeRequest);
 
-
-        } else if (this.timeResponse == 0 && other.timeResponse != 0) {
+        } else if (other.timeResponse != 0 && this.timeResponse == 0) {
             return (int) (other.timeResponse - this.timeRequest);
 
-
-        } else if (this.timeResponse != 0 && other.timeResponse == 0) {
+        } else if (this.timeResponse != 0 && other.timeResponse == 0 ) {
             return (int) (other.timeRequest - this.timeResponse);
-
 
         } else {
             return (int) (other.timeResponse - this.timeResponse);

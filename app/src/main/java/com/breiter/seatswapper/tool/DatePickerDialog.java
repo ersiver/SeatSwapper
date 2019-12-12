@@ -7,6 +7,7 @@ import com.breiter.seatswapper.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DatePickerDialog {
 
@@ -16,7 +17,7 @@ public class DatePickerDialog {
         private Context context;
         private Date pickedDate;
 
-        int day, month, year;
+        private int day, month, year;
 
         public DatePickerDialog(Context context, EditText dateEditText) {
             this.context = context;
@@ -60,22 +61,18 @@ public class DatePickerDialog {
         private void updateLabel() {
 
             pickedDate = calendar.getTime();
-
             dateEditText.setText(fromDateToString(pickedDate));
 
         }
-
 
         public Date getDate(){
             return pickedDate;
         }
 
 
-
-
-        public static String fromDateToString(Date date){
+        private static String fromDateToString(Date date){
             String pattern = "dd-MM-yyyy";
-            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
             return sdf.format(date);
 
 

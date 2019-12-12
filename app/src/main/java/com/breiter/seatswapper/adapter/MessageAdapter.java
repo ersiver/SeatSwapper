@@ -44,9 +44,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     private FirebaseUser currentUser;
     private DatabaseReference rootRef;
-
     private ResponseSubmitter responseSubmitter;
-
     private Context context;
     private List<Message> messageList;
 
@@ -55,18 +53,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         this.messageList = messageList;
     }
 
-
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         rootRef = FirebaseDatabase.getInstance().getReference();
-
         responseSubmitter = new ResponseSubmitter();
 
-        View view = null;
+        View view;
 
         if (viewType == MSG_PENDING)
             view = LayoutInflater.from(context).inflate(R.layout.item_mail_request_pending, parent, false);
@@ -74,50 +69,37 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         else if (viewType == MSG_ACCEPTED)
             view = LayoutInflater.from(context).inflate(R.layout.item_mail_request_accepted, parent, false);
 
-        else if (viewType == MSG_REJECTED)
+        else
             view = LayoutInflater.from(context).inflate(R.layout.item_mail_request_rejected, parent, false);
 
         return new MessageAdapter.ViewHolder(view);
 
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull final MessageAdapter.ViewHolder holder, final int position) {
 
         final Message message = messageList.get(position);
-
         final String flightId = message.getFlightId();
-
         displayRequesterName(message, holder);     //1
-
         displayResponderName(message, holder);     //2
-
         displaySenderSeat(message, holder);        //3
-
         displayResponderSeat(message, holder);     //4
-
         displayDateTimeDetails(message, holder);   //5
-
         displayFlightDetails(message, holder);     //6
-
         controlButtonsVisibility(message, holder); //7
-
 
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 responseSubmitter.acceptRequest(context, message, flightId);
 
             }
         });
 
-
         holder.rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 responseSubmitter.rejectRequest(context, message, flightId);
 
             }
@@ -125,37 +107,33 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     }
 
-
     //1. Retrieve requester name and set it in the relevant text views
     private void displayRequesterName(final Message message, final ViewHolder holder) {
 
         rootRef.child("Users")
                 .child(message.getRequester())
                 .addValueEventListener(new ValueEventListener() {
-
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         User user = dataSnapshot.getValue(User.class);
 
-                        if (user.getUserId().equals(message.getRequester())) {
+                        if (user != null) {
+                            if (user.getUserId().equals(message.getRequester())) {
+                                String username = user.getUsername();
 
-                            String username = user.getUsername();
+                                if (message.getRequester().equals(currentUser.getUid())) {
+                                    holder.requesterNameLineOneTextView.setText("You");
+                                    holder.requesterNameLineTwoTextView.setText("Your");
+                                    holder.requesterNameLineThreeTextView.setText("You");
 
-                            if (message.getRequester().equals(currentUser.getUid())) {
-                                holder.requesterNameLineOneTextView.setText("You");
-                                holder.requesterNameLineTwoTextView.setText("Your");
-                                holder.requesterNameLineThreeTextView.setText("You");
-
-                            } else {
-                                holder.requesterNameLineOneTextView.setText(username);
-                                holder.requesterNameLineTwoTextView.setText(username + "'s");
-                                holder.requesterNameLineThreeTextView.setText(username);
-
+                                } else {
+                                    holder.requesterNameLineOneTextView.setText(username);
+                                    holder.requesterNameLineTwoTextView.setText(username + "'s");
+                                    holder.requesterNameLineThreeTextView.setText(username);
+                                }
                             }
+
                         }
-
-
                     }
 
                     @Override
@@ -164,9 +142,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     }
                 });
 
-
     }
-
 
     //2. Retrieve responder name and set it in the relevant text views
     private void displayResponderName(final Message message, final ViewHolder holder) {
@@ -178,23 +154,24 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         User user = dataSnapshot.getValue(User.class);
+                        if (user != null) {
+                            String username = user.getUsername();
 
-                        String username = user.getUsername();
+                            if (message.getResponder().equals(currentUser.getUid())) {
+                                holder.responderNameLineOneTextView.setText("you");
+                                holder.responderNameLineTwoTextView.setText("you");
+                                holder.responderNameLineThreeTextView.setText("You");
+                                holder.responderNameLineFourTextView.setText("your");
+                                holder.responderNameLineFiveTextView.setText("yours ");
 
-                        if (message.getResponder().equals(currentUser.getUid())) {
-                            holder.responderNameLineOneTextView.setText("you");
-                            holder.responderNameLineTwoTextView.setText("you");
-                            holder.responderNameLineThreeTextView.setText("You");
-                            holder.responderNameLineFourTextView.setText("your");
-                            holder.responderNameLineFiveTextView.setText("yours ");
+                            } else {
+                                holder.responderNameLineOneTextView.setText(username);
+                                holder.responderNameLineTwoTextView.setText(username);
+                                holder.responderNameLineThreeTextView.setText(username);
+                                holder.responderNameLineFourTextView.setText(username + "'s");
+                                holder.responderNameLineFiveTextView.setText(username + "'s ");
 
-
-                        } else {
-                            holder.responderNameLineOneTextView.setText(username);
-                            holder.responderNameLineTwoTextView.setText(username);
-                            holder.responderNameLineThreeTextView.setText(username);
-                            holder.responderNameLineFourTextView.setText(username + "'s");
-                            holder.responderNameLineFiveTextView.setText(username + "'s ");
+                            }
 
                         }
 
@@ -209,26 +186,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     }
 
-
     //3.
     private void displaySenderSeat(final Message message, final ViewHolder holder) {
-
         holder.requesterSeatNumTextView.setText(message.getRequesterSeat());
-
         holder.responderNewSeatTextView.setText(message.getRequesterSeat());
 
     }
 
-
     //4.
     private void displayResponderSeat(final Message message, final ViewHolder holder) {
-
         holder.responderSeatNumTextView.setText(message.getResponderSeat());
-
         holder.requesterNewSeatTextView.setText(message.getResponderSeat());
-
     }
-
 
     //5.
     private void displayDateTimeDetails(Message message, ViewHolder holder) {
@@ -236,12 +205,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         //Display request time
         holder.dateRequestTextView.setText(MessageTimeConverter.getRequestTime(message));
 
-
         //Display response time
         holder.dateResponseTextView.setText(MessageTimeConverter.getResponseTime(message));
 
     }
-
 
     //6.
     private void displayFlightDetails(Message message, final ViewHolder holder) {
@@ -249,16 +216,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         rootRef.child("Flights").child(message.getFlightId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 Flight flight = dataSnapshot.getValue(Flight.class);
 
-                holder.departureTextView.setText(flight.getDeparture());
-                holder.destinationTextView.setText(flight.getDestination());
-                holder.flightDateTextView.setText(flight.getDate() + ", ");
-                holder.flightTimeTextView.setText(flight.getTime());
-                holder.flightNumberTextView.setText(flight.getFlightNumber() + " ");
-                holder.airlinesTextView.setText(flight.getAirlines());
-
+                if (flight != null) {
+                    holder.departureTextView.setText(flight.getDeparture());
+                    holder.destinationTextView.setText(flight.getDestination());
+                    holder.flightDateTextView.setText(flight.getDate() + ", ");
+                    holder.flightTimeTextView.setText(flight.getTime());
+                    holder.flightNumberTextView.setText(flight.getFlightNumber() + " ");
+                    holder.airlinesTextView.setText(flight.getAirlines());
+                }
 
             }
 
@@ -279,11 +246,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         if (message.getType().equals("pending request") && message.getResponder().equals(currentUser.getUid()))
             holder.responseRelativeLayout.setVisibility(View.VISIBLE);
-
         else
             holder.responseRelativeLayout.setVisibility(View.GONE);
     }
-
 
 
     @Override
@@ -304,45 +269,33 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         else
             return MSG_REJECTED;
 
-
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView requesterNameLineOneTextView;
         TextView requesterNameLineTwoTextView;
         TextView requesterNameLineThreeTextView;
-
-
         TextView responderNameLineOneTextView;
         TextView responderNameLineTwoTextView;
         TextView responderNameLineThreeTextView;
         TextView responderNameLineFourTextView;
         TextView responderNameLineFiveTextView;
-
-
         TextView requesterSeatNumTextView;
         TextView responderSeatNumTextView;
         TextView requesterNewSeatTextView;
         TextView responderNewSeatTextView;
-
         TextView dateRequestTextView;
         TextView dateResponseTextView;
         TextView statusResponseTextView;
-
         TextView departureTextView;
         TextView destinationTextView;
         TextView flightDateTextView;
         TextView flightTimeTextView;
         TextView flightNumberTextView;
         TextView airlinesTextView;
-
         RelativeLayout responseRelativeLayout;
         Button acceptButton;
         Button rejectButton;
-
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -350,31 +303,24 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             requesterNameLineOneTextView = itemView.findViewById(R.id.requesterNameLineOneTextView);
             requesterNameLineTwoTextView = itemView.findViewById(R.id.requesterNameLineTwoTextView);
             requesterNameLineThreeTextView = itemView.findViewById(R.id.requesterNameLineThreeTextView);
-
             responderNameLineOneTextView = itemView.findViewById(R.id.responderNameLineOneTextView);
             responderNameLineTwoTextView = itemView.findViewById(R.id.responderNameLineTwoTextView);
             responderNameLineThreeTextView = itemView.findViewById(R.id.responderNameLineThreeTextView);
             responderNameLineFourTextView = itemView.findViewById(R.id.responderNameLineFourTextView);
             responderNameLineFiveTextView = itemView.findViewById(R.id.responderNameLineFiveTextView);
-
-
             requesterSeatNumTextView = itemView.findViewById(R.id.requesterSeatNumTextView);
             responderSeatNumTextView = itemView.findViewById(R.id.responderSeatNumTextView);
             requesterNewSeatTextView = itemView.findViewById(R.id.requesterNewSeatTextView);
             responderNewSeatTextView = itemView.findViewById(R.id.responderNewSeatTextView);
-
             dateRequestTextView = itemView.findViewById(R.id.dateRequestTextView);
             dateResponseTextView = itemView.findViewById(R.id.dateResponseTextView);
             statusResponseTextView = itemView.findViewById(R.id.statusResponseTextView);
-
-
             departureTextView = itemView.findViewById(R.id.departureTextView);
             destinationTextView = itemView.findViewById(R.id.destinationTextView);
             flightDateTextView = itemView.findViewById(R.id.flightDateTextView);
             flightTimeTextView = itemView.findViewById(R.id.flightTimeTextView);
             flightNumberTextView = itemView.findViewById(R.id.flightNumberTextView);
             airlinesTextView = itemView.findViewById(R.id.airlinesTextView);
-
             responseRelativeLayout = itemView.findViewById(R.id.responseRelativeLayout);
             acceptButton = itemView.findViewById(R.id.acceptButton);
             rejectButton = itemView.findViewById(R.id.rejectButton);

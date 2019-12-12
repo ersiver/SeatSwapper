@@ -28,7 +28,6 @@ public class FlightInputChecker {
     private Button submitFlightButton;
 
     public FlightInputChecker(Button submitFlightButton){
-
         this.submitFlightButton = submitFlightButton;
     }
 
@@ -105,7 +104,6 @@ public class FlightInputChecker {
 
         if (isFlightNumberValid && isDateValid && isDepartureAirportValid && isTimeValid
                 && isDestinationValid && isAirlinesValid && isSeatNumeberValid)
-
             submitFlightButton.setEnabled(true);
 
         else
@@ -117,7 +115,6 @@ public class FlightInputChecker {
     //Getters
     public String getUniqeId() {
         String validDate = date.replaceAll("-","");
-
         String validTime = time.replaceAll(":", "");
 
        return airlines.trim()+validDate+validTime+flightNumber.trim()+

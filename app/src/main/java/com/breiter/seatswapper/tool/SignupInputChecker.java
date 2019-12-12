@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 
 public class SignupInputChecker {
 
-
     private String usernameInput;
     private String emailInput;
     private String passwordInput;
@@ -75,15 +74,11 @@ public class SignupInputChecker {
         });
     }
 
-
-
     //Validate username input
     private boolean isUsernameValid() {
         return usernameInput.length() >= 1 && usernameInput.length() <= 30;
 
     }
-
-
 
     //Validate email input
     private boolean isEmailValid() {
@@ -95,8 +90,6 @@ public class SignupInputChecker {
         } else
             return false;
     }
-
-
 
     //Validate password input
     private boolean isPasswordValid() {
@@ -117,8 +110,6 @@ public class SignupInputChecker {
             return false;
     }
 
-
-
     //Enable sign-up button, when all credenitals meet requirements
     private void updateButton(){
 
@@ -128,8 +119,6 @@ public class SignupInputChecker {
         else
             signupButton.setEnabled(false);
     }
-
-
 
     //Getters
     public String getUsernameInput() {

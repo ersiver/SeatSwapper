@@ -19,6 +19,7 @@ import com.breiter.seatswapper.R;
 import com.breiter.seatswapper.adapter.MailAdapter;
 import com.breiter.seatswapper.model.Message;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Iterator;
 import java.util.List;
@@ -44,27 +45,23 @@ public class SwipeController extends ItemTouchHelper.SimpleCallback {
     }
 
 
-    //Not swipable position for unread messages
+    //Not swipeable position for unread messages and those requests that are not responded
     @Override
     public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
 
         Message messageToBeRemoved = mailList.get(viewHolder.getAdapterPosition());
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        if (messageToBeRemoved != null && currentUser != null) {
+            if (messageToBeRemoved.getType().equals("pending request")) {
+                if (!messageToBeRemoved.getRequester().equals(currentUser.getUid()))
+                    return 0;
 
-        if (messageToBeRemoved.getType().equals("pending request")) {
+            } else {
+                if (!messageToBeRemoved.isIsread() && messageToBeRemoved.getRequester().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                    return 0;
 
-            if (!messageToBeRemoved.getRequester().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-
-                return 0;
-
-
-        } else {
-
-            if (!messageToBeRemoved.isIsread() && messageToBeRemoved.getRequester().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-
-                return 0;
-
-
+            }
         }
 
     return super.getSwipeDirs(recyclerView, viewHolder);
@@ -81,7 +78,6 @@ public class SwipeController extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
         int position = viewHolder.getAdapterPosition();
-
         mailAdapter.deleteMessage(position);
 
     }
@@ -94,30 +90,23 @@ public class SwipeController extends ItemTouchHelper.SimpleCallback {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 
         View itemView = viewHolder.itemView;
-
         int backgroundCornerOffset = 20;
-
         int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
         int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
         int iconBottom = iconTop + icon.getIntrinsicHeight();
-
 
         if (dX < 0) {
             int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
             int iconRight = itemView.getRight() - iconMargin;
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-
             background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
                     itemView.getTop(), itemView.getRight(), itemView.getBottom());
 
         } else {
             background.setBounds(0, 0, 0, 0);
             icon.setBounds(0, 0, 0, 0);
-
-
         }
         background.draw(c);
-
         icon.draw(c);
 
     }

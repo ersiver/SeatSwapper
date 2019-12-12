@@ -54,73 +54,55 @@ public class ProfileFragment extends Fragment {
     private TextView uploadImgTxtView;
     private TextView logoutTxtView;
     private CircleImageView profileImageView;
-
     private LogoutManager logoutManager;
-
     private FirebaseUser currentUser;
     private DatabaseReference userRef;
     private StorageReference storageReference;
     private StorageTask uploadTask;
     private Uri imageUri;
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         userRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
-
         storageReference = FirebaseStorage.getInstance().getReference("Uploads");
 
         bindViews(view);  //1
-
         setUserProfile(); //2
-
 
         uploadImgTxtView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 verifyReadStoragePermission();  //3
 
             }
         });
 
-
         // Logout and redirect to Login Activity
         logoutTxtView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                logoutManager = new LogoutManager(getContext());
+                logoutManager = new LogoutManager(requireContext());
                 logoutManager.logout();
 
             }
         });
 
-
         return view;
-
     }
-
 
     //1.
     private void bindViews(View view) {
 
         usernameTextView = view.findViewById(R.id.usernameTextView);
-
         profileImageView = view.findViewById(R.id.profileImageView);
-
         uploadImgTxtView = view.findViewById(R.id.uploadImgTxtView);
-
         logoutTxtView = view.findViewById(R.id.logoutTxtView);
 
     }
-
 
     //2. Retrieve current user's photo and username from Firebase and set to the views
     private void setUserProfile() {
@@ -128,22 +110,17 @@ public class ProfileFragment extends Fragment {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
 
-                try {
-
-                    User user = dataSnapshot.getValue(User.class);
-
+                if (user != null) {
                     usernameTextView.setText(user.getUsername());
 
                     if (user.getImageURL().equals("default"))
                         profileImageView.setImageResource(R.drawable.user);
                     else
-                        Glide.with(getContext()).load(user.getImageURL()).into(profileImageView);
+                        Glide.with(requireContext()).load(user.getImageURL()).into(profileImageView);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -158,12 +135,10 @@ public class ProfileFragment extends Fragment {
     //3. Checks if the app has permission to read from device storage and proceed
     private void verifyReadStoragePermission() {
 
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED)
-
-            ActivityCompat.requestPermissions(getActivity(),
+            ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGE_GALLERY_REQUEST);
-
         else
             photoGalleryIntent(); //3a
     }
@@ -174,9 +149,7 @@ public class ProfileFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == IMAGE_GALLERY_REQUEST) {
-
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 photoGalleryIntent(); //3a
 
             }
@@ -184,10 +157,8 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-
     //3a If there's a permission for read the library, start photo intent
     private void photoGalleryIntent() {
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -202,40 +173,30 @@ public class ProfileFragment extends Fragment {
 
         if (requestCode == IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK &&
                 data != null && data.getData() != null) {
-
             imageUri = data.getData();
-
             if (uploadTask != null && uploadTask.isInProgress())
-                Toast.makeText(getContext(), "Uploading in progress", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(requireContext(), "Uploading in progress", Toast.LENGTH_SHORT).show();
             else
                 uploadFileFirebase(); //3b
 
         }
     }
 
-
     //3b. Uploading image file to Firebase storage
     private void uploadFileFirebase() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-
+        final ProgressDialog progressDialog = new ProgressDialog(requireContext());
         progressDialog.setMessage("Uploading...");
-
         progressDialog.show();
 
         if (imageUri != null) {
-
             String imageName = UUID.randomUUID().toString() + System.currentTimeMillis() + ".jpg";
-
             final StorageReference filePath = storageReference.child(imageName);
-
             uploadTask = filePath.putFile(imageUri);
 
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-
                     if (!task.isSuccessful())
                         throw task.getException();
 
@@ -246,41 +207,33 @@ public class ProfileFragment extends Fragment {
                 public void onComplete(@NonNull Task<Uri> task) {
 
                     if (task.isSuccessful()) {
-
                         Uri downloadUri = task.getResult();
-
-                        String imgUri = downloadUri.toString();
-
-                        Map<String, Object> hashMap = new HashMap<>();
-
-                        hashMap.put("imageURL", imgUri);
-
-                        userRef.updateChildren(hashMap);
-
-                        progressDialog.dismiss();
+                        if(downloadUri != null) {
+                            String imgUri = downloadUri.toString();
+                            Map<String, Object> hashMap = new HashMap<>();
+                            hashMap.put("imageURL", imgUri);
+                            userRef.updateChildren(hashMap);
+                            progressDialog.dismiss();
+                        }
 
                     } else {
-                        Toast.makeText(getContext(), "There was a problem with loading your" +
+                        Toast.makeText(requireContext(), "There was a problem with loading your" +
                                 " image...", Toast.LENGTH_SHORT).show();
-
                         progressDialog.dismiss();
-
                     }
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });
 
         } else {
             //imgUri is null
-
-            Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show();
         }
 
     }

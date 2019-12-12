@@ -12,16 +12,14 @@ import com.breiter.seatswapper.R;
 
 public class PasswordRulesAdapter extends BaseExpandableListAdapter {
 
-    Context context;
-
-    String[] title = {"(strong password rules)"};
-
-    String[][] rules = {{"Your password must contain:\n" +
+    private Context context;
+    private String[] title = {"(strong password rules)"};
+    private String[][] rules = {{"Your password must contain:\n" +
             "at least 8 characters\n" +
             "at least one uppercase letter\n" +
             "at least one lowercase letter\n" +
             "at least one number digit \n" +
-            "at least one special character"} , {}};
+            "at least one special character"}, {}};
 
     public PasswordRulesAdapter(Context context) {
         this.context = context;
@@ -66,15 +64,9 @@ public class PasswordRulesAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
 
         String passwordRule = (String) getGroup(i);
-        if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_password_rule, null);
-        }
-
+        view = LayoutInflater.from(context).inflate(R.layout.item_password_rule, viewGroup, false);
         TextView passwordRule2 = view.findViewById(R.id.passRulesTitle);
-
         passwordRule2.setTypeface(null, Typeface.ITALIC);
-
         passwordRule2.setText(passwordRule);
 
         return view;
@@ -84,16 +76,9 @@ public class PasswordRulesAdapter extends BaseExpandableListAdapter {
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
 
         String rules = (String) getChild(i, i1);
-
-        if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_password_rules_title, null);
-        }
-
+        view = LayoutInflater.from(context).inflate(R.layout.item_password_rules_title, viewGroup, false);
         TextView rulesDescription = view.findViewById(R.id.rulesDescription);
-
         rulesDescription.setTypeface(null, Typeface.ITALIC);
-
         rulesDescription.setText(rules);
 
         return view;

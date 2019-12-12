@@ -26,7 +26,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private EditText emailEditText;
     private EditText passwordEditText;
     private FrameLayout hidePasswordFrameLayout;
@@ -44,9 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
                 FirebaseUser user = mAuth.getCurrentUser();
-
                 if (user != null)
                     redirectUser(); //1
 
@@ -54,11 +51,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         bindViews(); //2
-
         setClickListeners(); //3
 
     }
-
 
     //1. Redirect logged user to the Account
     public void redirectUser() {
@@ -68,21 +63,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
     //2.
     private void bindViews() {
 
         emailEditText = findViewById(R.id.emailEditText);
-
         passwordEditText = findViewById(R.id.passAtLoginEditText);
-
         hidePasswordFrameLayout = findViewById(R.id.hidePasswordFrameLayout);
-
         showPasswordFrameLayout = findViewById(R.id.showPasswordFrameLayout);
-
         isHidden = true;
     }
-
 
     //3.
     private void setClickListeners() {
@@ -96,37 +85,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
     @Override
     public void onClick(View view) {
 
         if (view.getId() == R.id.loginButton)
             login(); //4
 
-
         else if (view.getId() == R.id.signupTextView)
             signUp(); //5
 
-
         else if (view.getId() == R.id.showPasswordFrameLayout || view.getId() == R.id.hidePasswordFrameLayout)
             showOrHidePassword(); //6
-
 
         else if (view.getId() == R.id.logoImageView || view.getId() == R.id.mainLayout)
             dismissKeyboard(); //7
 
     }
 
-
     //4. Login and redirect
     public void login() {
 
         String emailInput = emailEditText.getText().toString().trim();
-
         String passwordInput = passwordEditText.getText().toString().trim();
 
         if (credentialsValid(emailInput, passwordInput)) { //3a.
-
             mAuth.signInWithEmailAndPassword(emailInput, passwordInput)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -134,7 +116,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             if (task.isSuccessful())
                                 redirectUser();
-
                             else
                                 Toast.makeText(LoginActivity.this,
                                         "Authentication failed", Toast.LENGTH_SHORT).show();
@@ -143,8 +124,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     });
         }
     }
-
-
 
     //4a. Check, if email and/or password inputs are not empty
     private boolean credentialsValid(String emailInput, String passwordInput) {
@@ -158,17 +137,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
-
     //5. Click the sign-up option
     public void signUp() {
-
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
 
     }
-
-
 
     //6. Click the show/hide-icon to reveal or hide the password
     public void showOrHidePassword() {
@@ -177,7 +151,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //Show password
             passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             passwordEditText.setSelection(passwordEditText.length());
-
             showPasswordFrameLayout.setVisibility(View.INVISIBLE);
             hidePasswordFrameLayout.setVisibility(View.VISIBLE);
             isHidden = false;
@@ -186,27 +159,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //Hide password
             passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             passwordEditText.setSelection(passwordEditText.length());
-
             hidePasswordFrameLayout.setVisibility(View.INVISIBLE);
             showPasswordFrameLayout.setVisibility(View.VISIBLE);
             isHidden = true;
         }
     }
 
-
-
     //7. Dismiss keyboard once layout or logo are tapped
     public void dismissKeyboard() {
 
         InputMethodManager inputMethodManager = (InputMethodManager) LoginActivity.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-
-        if (LoginActivity.this.getCurrentFocus() != null)
-
+        if (LoginActivity.this.getCurrentFocus() != null && inputMethodManager != null)
             inputMethodManager.hideSoftInputFromWindow(LoginActivity.this.getCurrentFocus().getWindowToken(), 0);
 
     }
-
-
 
     @Override
     protected void onStart() {
@@ -214,15 +180,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
         mAuth.addAuthStateListener(mAuthListener);
     }
-
-
 
     @Override
     protected void onStop() {

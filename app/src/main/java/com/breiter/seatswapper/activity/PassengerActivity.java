@@ -33,7 +33,6 @@ public class PassengerActivity extends AppCompatActivity {
 
     private FirebaseUser currentUser;
     private DatabaseReference rootRef;
-
     private RecyclerView userRecyclerView;
     private List<FlightPassenger> passengersList;
     private PassengerAdapter passengerAdapter;
@@ -47,27 +46,19 @@ public class PassengerActivity extends AppCompatActivity {
     private TextView airlineTextView;
     private ImageView goBackImageView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger);
 
         flightId = getIntent().getStringExtra("flightId");
-
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         rootRef = FirebaseDatabase.getInstance().getReference();
-
         passengersList = new ArrayList<>();
 
         bindViews(); //1
-
         displayPassengers(); //2
-
         displayFlightInfo(); //3
-
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,35 +92,21 @@ public class PassengerActivity extends AppCompatActivity {
 
     }
 
-
-
     //1.
     private void bindViews() {
 
         userRecyclerView = findViewById(R.id.usersRecyclerView);
-
         userRecyclerView.setHasFixedSize(true);
-
         userRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
         searchEditText = findViewById(R.id.searchEditText);
-
         dateTextView = findViewById(R.id.dateTextView);
-
         timeTextView = findViewById(R.id.timeTextView);
-
         departureTextView = findViewById(R.id.departureTextView);
-
         destinationTextView = findViewById(R.id.destinationTextView);
-
         flightNoTextView = findViewById(R.id.flightNoTextView);
-
         airlineTextView = findViewById(R.id.airlineTextView);
-
         goBackImageView = findViewById(R.id.goBackImageView);
-
     }
-
 
     /*
     2. Retrieve all passengers of the flight from Firebase
@@ -139,34 +116,23 @@ public class PassengerActivity extends AppCompatActivity {
     private void displayPassengers() {
 
         DatabaseReference passengersRef = rootRef.child("FlightPassengers").child(flightId);
-
         passengersRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 if (searchEditText.getText().toString().equals("")) {
-
                     passengersList.clear();
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                         FlightPassenger passenger = snapshot.getValue(FlightPassenger.class);
-
                         assert passenger != null;
-
                         assert currentUser != null;
-
                         if (!passenger.getPassengerId().equals(currentUser.getUid()) && (!passenger.isIsawaiting()))
-
                             passengersList.add(passenger);
-
                     }
 
                     Collections.sort(passengersList);
-
                     passengerAdapter = new PassengerAdapter(PassengerActivity.this, passengersList);
-
                     userRecyclerView.setAdapter(passengerAdapter);
 
                 }
@@ -180,32 +146,22 @@ public class PassengerActivity extends AppCompatActivity {
 
     }
 
-
-
     //3. Display information about the flight
     private void displayFlightInfo() {
 
         DatabaseReference flightRef = rootRef.child("Flights").child(flightId);
-
         flightRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 Flight flight = dataSnapshot.getValue(Flight.class);
-
-                departureTextView.setText(flight.getDeparture() + " ");
-
-                destinationTextView.setText(flight.getDestination());
-
-                dateTextView.setText(flight.getDate()+ ", ");
-
-                timeTextView.setText(flight.getTime()+ ", ");
-
-                flightNoTextView.setText(flight.getFlightNumber() + " ");
-
-                airlineTextView.setText(flight.getAirlines());
-
-
+                if (flight != null) {
+                    departureTextView.setText(flight.getDeparture() + " ");
+                    destinationTextView.setText(flight.getDestination());
+                    dateTextView.setText(flight.getDate() + ", ");
+                    timeTextView.setText(flight.getTime() + ", ");
+                    flightNoTextView.setText(flight.getFlightNumber() + " ");
+                    airlineTextView.setText(flight.getAirlines());
+                }
             }
 
             @Override
@@ -221,38 +177,25 @@ public class PassengerActivity extends AppCompatActivity {
     //4. Display passengers with particular seat no.
     private void displaySearchedSeats(final String searchText) {
 
-
         DatabaseReference passengersRef = rootRef.child("FlightPassengers").child(flightId);
-
         passengersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 passengersList.clear();
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                     FlightPassenger passenger = snapshot.getValue(FlightPassenger.class);
-
                     assert passenger != null;
-
                     assert currentUser != null;
 
                     if (passenger.getSearch().contains(searchText)) {
-
                         if (!passenger.getPassengerId().equals(currentUser.getUid()) && (!passenger.isIsawaiting()))
-
                             passengersList.add(passenger);
-
                     }
                 }
 
                 Collections.sort(passengersList);
-
                 passengerAdapter = new PassengerAdapter(PassengerActivity.this, passengersList);
-
                 userRecyclerView.setAdapter(passengerAdapter);
-
 
             }
 

@@ -36,9 +36,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
-
     private SignupInputChecker signupInputsManager;
-
     private Button signupButton;
     private EditText usernameEditText;
     private EditText emailEditText;
@@ -49,10 +47,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private FrameLayout hidePasswordFrameLayout;
     private FrameLayout showPasswordFrameLayout;
     private boolean isHidden;
-
     private ExpandableListView expandableTextView;
     private PasswordRulesAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +58,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
 
         bindViews(); //1
-
         setClickListeners(); //2
-
         checkUserInput(); //3.
 
     }
-
-
 
     //1.
     private void bindViews() {
 
         signupButton = findViewById(R.id.signupButton);
         signupButton.setEnabled(false);
-
         usernameEditText = findViewById(R.id.usernameEditText);
         invalidNameTextView = findViewById(R.id.invalidNameTextView);
         emailEditText = findViewById(R.id.emailEditText);
@@ -86,14 +77,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         hidePasswordFrameLayout = findViewById(R.id.hidePasswordFrameLayout);
         showPasswordFrameLayout = findViewById(R.id.showPasswordFrameLayout);
         isHidden = true;
-
         expandableTextView = findViewById(R.id.expandableListView);
         adapter = new PasswordRulesAdapter(SignupActivity.this);
         expandableTextView.setAdapter(adapter);
 
     }
-
-
 
     //2.
     private void setClickListeners() {
@@ -113,11 +101,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private void checkUserInput() {
 
         signupInputsManager = new SignupInputChecker(signupButton);
-
         signupInputsManager.validateUserInput(usernameEditText, invalidNameTextView,"Please enter a valid name");
-
         signupInputsManager.validateUserInput(emailEditText, invalidEmailTextView, "Please enter a valid e-mail" );
-
         signupInputsManager.validateUserInput(passwordEditText, invalidPasswordTextView, "Password weak" );
 
     }
@@ -130,21 +115,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if (view.getId() == R.id.signupButton)
             signUp(); //4
 
-
         else if (view.getId() == R.id.showPasswordFrameLayout || view.getId() == R.id.hidePasswordFrameLayout)
             showOrHidePassword(); //5
 
-
         else if (view.getId() == R.id.logoImageView || view.getId() == R.id.mainLayout)
             dismissKeyboard(); //6
-
 
         else if (view.getId() == R.id.goBackImageView)
             finish(); // go back to previous activity
 
     }
-
-
 
     //4. Create a new user on the Firebase & redirect
     public void signUp() {
@@ -153,52 +133,37 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mAuth.createUserWithEmailAndPassword(signupInputsManager.getEmailInput(), signupInputsManager.getPasswordInput())
                 .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             assert user != null;
-
                             String userId = user.getUid();
-
                             reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
 
                             Map<String, String> hashMap = new HashMap<>();
-
                             hashMap.put("userId", userId);
-
                             hashMap.put("username", signupInputsManager.getUsernameInput());
-
                             hashMap.put("imageURL", "default");
-
                             hashMap.put("email", signupInputsManager.getEmailInput());
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-
                                     if (task.isSuccessful()) {
-
                                         redirectUser(); //3a
                                     }
                                 }
                             });
 
-
                         } else {
-
-                                Toast.makeText(SignupActivity.this, task.getException().getMessage(),
+                                Toast.makeText(SignupActivity.this, "Something went wrong...",
                                         Toast.LENGTH_SHORT).show();
-
                         }
                     }
 
                 });
     }
-
-
 
     //4a.
     private void redirectUser() {
@@ -208,8 +173,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-
-
     //5. Click the show/hide-icon to reveal or hide the password
     public void showOrHidePassword() {
 
@@ -217,7 +180,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             //Show password
             passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             passwordEditText.setSelection(passwordEditText.length());
-
             showPasswordFrameLayout.setVisibility(View.INVISIBLE);
             hidePasswordFrameLayout.setVisibility(View.VISIBLE);
             isHidden = false;
@@ -226,22 +188,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             //Hide password
             passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             passwordEditText.setSelection(passwordEditText.length());
-
             hidePasswordFrameLayout.setVisibility(View.INVISIBLE);
             showPasswordFrameLayout.setVisibility(View.VISIBLE);
             isHidden = true;
         }
     }
 
-
-
     //6. Dismiss keyboard once layout or logo are tapped
     public void dismissKeyboard() {
 
         InputMethodManager inputMethodManager = (InputMethodManager) SignupActivity.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
-
-        if (SignupActivity.this.getCurrentFocus() != null)
-
+        if (SignupActivity.this.getCurrentFocus() != null && inputMethodManager != null)
             inputMethodManager.hideSoftInputFromWindow(SignupActivity.this.getCurrentFocus().getWindowToken(), 0);
 
     }
