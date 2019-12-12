@@ -26,7 +26,6 @@ public class ResponseSubmitter {
 
     //1. Accepting the request from MessageAdapter
     public void acceptRequest(final Context context, final Message message, final String flightId) {
-
         final Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("timeResponse", System.currentTimeMillis());
         hashMap.put("type", "accepted response");
@@ -48,12 +47,10 @@ public class ResponseSubmitter {
                         }
                     }
                 });
-
     }
 
     //2. Rejecting the request from MessageAdapter
     public void rejectRequest(final Context context, final Message message, final String flightId) {
-
         final Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("timeResponse", System.currentTimeMillis());
         hashMap.put("type", "rejected response");
@@ -71,7 +68,6 @@ public class ResponseSubmitter {
                         }
                     }
                 });
-
     }
 
     //3. Unlock "is awaiting" for request status, so the user is no lonegr blocked against sanding request for that flight
@@ -79,7 +75,6 @@ public class ResponseSubmitter {
         Map<String, Object> passengersMap = new HashMap<>();
         passengersMap.put("isawaiting", isawaiting);
         rootRef.child("FlightPassengers").child(flightId).child(requesterId).updateChildren(passengersMap);
-
     }
 
     //4. When the request is approved swap seats of the 2 passengers
@@ -94,14 +89,11 @@ public class ResponseSubmitter {
         responderMap.put("passengerSeat", newResponderSeat);
         responderMap.put("search", newResponderSeat.toLowerCase());
         rootRef.child("FlightPassengers").child(flightId).child(responderId).updateChildren(responderMap);
-
     }
 
 
     //5. Once the responder accepts the request, all the other requests for that flight sent to them are rejected
     private void unlockResponderRequests(final Context context, final Message message, final String flightId) {
-
-
         rootRef.child("Messages").child(message.getResponder())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -124,13 +116,11 @@ public class ResponseSubmitter {
 
                     }
                 });
-
     }
 
 
     //6. Once the requester is approved, all their pending request for that flight are rejected
     private void unlockRequesterOtherRequests(final Context context, final Message message, final String flightId) {
-
         rootRef.child("Messages").child(message.getRequester())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -154,7 +144,6 @@ public class ResponseSubmitter {
 
                     }
                 });
-
     }
 
 }

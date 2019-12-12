@@ -22,9 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestSubmitter {
-
     private DatabaseReference rootRef;
-
     private Context context;
     private FlightPassenger flightPassenger;
     private String requesterId;
@@ -38,7 +36,6 @@ public class RequestSubmitter {
     private Button yesButton;
 
     public RequestSubmitter(Context context, FlightPassenger passenger, String requesterId) {
-
         this.context = context;
         this.flightPassenger = passenger;
         this.requesterId = requesterId;
@@ -48,7 +45,6 @@ public class RequestSubmitter {
     }
 
     public void displayRequestDialog() {
-
         final Dialog dialog = new Dialog(context);
         setupDialog(dialog); //1
 
@@ -75,7 +71,6 @@ public class RequestSubmitter {
 
     //1.
     private void setupDialog(Dialog dialog) {
-
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_box_send_request);
@@ -90,12 +85,10 @@ public class RequestSubmitter {
         recipientSeatTextView.setText(flightPassenger.getPassengerSeat());
         displayRecipientName(); //1a
         displaySenderSeat();    //1b
-
     }
 
     //1a. Get recipient name from Firebase and display on a text views
     private void displayRecipientName() {
-
         rootRef.child("Users").child(responderId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -111,12 +104,10 @@ public class RequestSubmitter {
 
             }
         });
-
     }
 
     //1b. Get sender seat no. from Firebase and display on a text view
     private void displaySenderSeat() {
-
         rootRef.child("FlightPassengers").child(flightId).child(requesterId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -135,7 +126,6 @@ public class RequestSubmitter {
 
     //2. Sent a push massage, double for each user to easier retrieve user messages
     private void updateMessagesDatabase() {
-
         String messageSenderRef = "Messages/" + requesterId;
         String messageReceiverRef = "Messages/" + responderId;
         DatabaseReference userMessageKeyRef = rootRef.child("Messages").child(requesterId).push();
@@ -158,12 +148,10 @@ public class RequestSubmitter {
         rootRef.updateChildren(messageBodyDetails);
         addResponderSeatToMessage(messagePushID); //2a
         addRequesterSeatToMessage(messagePushID); //2b
-
     }
 
     //2a. Retrieve responder seat number and pass it to the message database
     private void addResponderSeatToMessage(final String messageId) {
-
         rootRef.child("FlightPassengers").child(flightId).child(responderId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -187,13 +175,11 @@ public class RequestSubmitter {
 
                     }
                 });
-
     }
 
 
     //2b. Retrieve requester seat number and pass it to the message database
     private void addRequesterSeatToMessage(final String messageId) {
-
         rootRef.child("FlightPassengers").child(flightId).child(requesterId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -224,7 +210,6 @@ public class RequestSubmitter {
 
     //3. Set the status "is awaiting" so it prevents sending another request for the same flight
     private void updatePassengersDatabase() {
-
         Map<String, Object> passengersMap = new HashMap<>();
         passengersMap.put("isawaiting", true);
         rootRef.child("FlightPassengers").child(flightId).child(requesterId).updateChildren(passengersMap);
