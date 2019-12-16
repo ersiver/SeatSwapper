@@ -205,7 +205,6 @@ public class ProfileFragment extends Fragment {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         if(downloadUri != null) {
