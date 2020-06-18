@@ -1,5 +1,5 @@
-## SeatSwapper
-Android app written in Java using Firebase. The app will allow passengers of the same flight to swap their seats before the boarding. 
+## sample-app-firebase
+Android sample app written in Java playing around with firebase features (register and sign in, read and write data to a Realtime Database, uploading photos to storage). The app will allow passengers of the same flight to swap their seats before the boarding. 
 
 #### Register, login & logout:
 
