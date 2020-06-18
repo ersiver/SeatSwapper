@@ -1,6 +1,13 @@
-## sample-app-firebase
-Android sample app written in Java playing around with firebase features (register and sign in, read and write data to a Realtime Database, uploading photos to storage). The app will allow passengers of the same flight to swap their seats before the boarding. 
+# sample-app-firebase
+Android sample app written in Java playing around with firebase features:
++ Register and sign in using Firebase Authentication,
++ Send a password reset email,
++ Read and write data to a Realtime Database, 
++ Uploading photos to Firebase Storage. 
 
+The app will allow passengers of the same flight to swap their seats before the boarding. 
+
+# Preview
 #### Register, login & logout:
 
 ![11](https://user-images.githubusercontent.com/58771510/70624677-b504b980-1c18-11ea-9cb5-e19331cc053f.JPG) ![12](https://user-images.githubusercontent.com/58771510/70624678-b504b980-1c18-11ea-98ac-a9cfe1a5bc6c.JPG) ![13](https://user-images.githubusercontent.com/58771510/70624680-b504b980-1c18-11ea-8e86-323b9a86d9f0.JPG)
